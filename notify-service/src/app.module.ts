@@ -3,14 +3,19 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentModule } from './models/student/student.module';
 import { BullModule } from '@nestjs/bull';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: './src/config/.env',
+      isGlobal: true,
+    }),
     StudentModule,
-    BullModule.forRoot({ // import bull queue module & config
+    BullModule.forRoot({
       redis: {
-        host: 'redis',
-        port: 6379,
+        host: process.env.redisHost,
+        port: Number(process.env.redisPort),
       },
     }),
   ],
