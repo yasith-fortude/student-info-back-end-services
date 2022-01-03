@@ -1,2 +1,2 @@
-# student-management-system
-Ramp Up Project
+# student-info-back-end-services
+Ramp up project
