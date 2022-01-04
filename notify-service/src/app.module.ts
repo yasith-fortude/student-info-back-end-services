@@ -14,8 +14,8 @@ import { ConfigModule } from '@nestjs/config';
     StudentModule,
     BullModule.forRoot({
       redis: {
-        host: process.env.redisHost,
-        port: Number(process.env.redisPort),
+        host: process.env.REDIS_HOST,
+        port: Number(process.env.REDIS_PORT),
       },
     }),
   ],

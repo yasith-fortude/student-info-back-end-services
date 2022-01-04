@@ -11,7 +11,7 @@ import { HttpModule } from '@nestjs/axios';
       { name: 'student-data-store' }, // initialize connection to 'student-data-store' queue
     ),
     EventsModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [StudentService, StudentConsumer],
   controllers: [],

@@ -4,18 +4,18 @@ volumes:
   data_storage:
 
 services:
-  # data_store:
-  #   container_name: data_store
-  #   image: node:16
-  #   volumes:
-  #     - ./data-store:/usr/src/app
-  #   working_dir: /usr/src/app
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   command: ["yarn", "start:dev"]
-  #   ports:
-  #     - 3000:3000
+  data_store:
+    container_name: data_store
+    image: node:16
+    volumes:
+      - ./data-store:/usr/src/app
+    working_dir: /usr/src/app
+    depends_on:
+      - postgres
+      - redis
+    command: ["yarn", "start:dev"]
+    ports:
+      - 3000:3000
 
   notify_service:
     container_name: notify_service
@@ -30,14 +30,14 @@ services:
     ports:
       - 3002:3002
   
-  # postgres:
-  #   image: postgres:14.1
-  #   ports:
-  #     - 35000:5432
-  #   environment:
-  #     POSTGRES_USER: user
-  #     POSTGRES_PASSWORD: password
-  #     POSTGRES_DB: studentinfo
+  postgres:
+    image: postgres:14.1
+    ports:
+      - 35000:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: studentinfo
 
   redis:
     container_name: redis
@@ -45,16 +45,16 @@ services:
     ports:
       - 6379:6379
 
-  # data_upload:
-  #   container_name: data_upload
-  #   image: node:16
-  #   volumes:
-  #     - ./data-upload:/usr/src/app
-  #     - data_storage:/usr/src/app/upload
-  #   working_dir: /usr/src/app
-  #   command: ["yarn", "start:dev"]
-  #   ports:
-  #     - 3001:3001
+  data_upload:
+    container_name: data_upload
+    image: node:16
+    volumes:
+      - ./data-upload:/usr/src/app
+      - data_storage:/usr/src/app/upload
+    working_dir: /usr/src/app
+    command: ["yarn", "start:dev"]
+    ports:
+      - 3001:3001
 
   # dashboard:
   #   container_name: dashboard

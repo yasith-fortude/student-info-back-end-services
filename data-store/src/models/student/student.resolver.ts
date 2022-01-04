@@ -16,7 +16,7 @@ export class StudentResolver {
   @Query(() => [StudentObjectType], { name: 'students' }) // get all students
   getStudents(): Promise<any[]> {
     try {
-      return this.studentService.findAll(); 
+      return this.studentService.findAll();
     } catch (error) {
       console.log(error);
       return error;
@@ -34,7 +34,10 @@ export class StudentResolver {
   }
 
   @Mutation(() => [StudentObjectType]) // create multiple students
-  async createStudents(@Args({ name: 'students', type: () => [CreateStudentInput] }) students: [CreateStudentInput]) {
+  async createStudents(
+    @Args({ name: 'students', type: () => [CreateStudentInput] })
+    students: [CreateStudentInput],
+  ) {
     try {
       const data = await this.studentService.bulkCreate(students);
       return data.generatedMaps;
@@ -57,7 +60,10 @@ export class StudentResolver {
   @Mutation(() => StudentObjectType) // remove a student
   async removeStudent(@Args('student') student: RemoveStudentInput) {
     try {
-      return await this.studentService.updateStudentStatus({ ...student, isActive: false });
+      return await this.studentService.updateStudentStatus({
+        ...student,
+        isActive: false,
+      });
     } catch (error) {
       console.log(error);
       return error;

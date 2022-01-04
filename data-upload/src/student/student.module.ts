@@ -5,11 +5,10 @@ import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
-    BullModule.registerQueue( // register 'student-data-store' queue
-      { name: 'student-data-store' },
-    ),
+    // register 'student-data-store' queue
+    BullModule.registerQueue({ name: 'student-data-store' }),
   ],
   controllers: [StudentController],
-  providers: [StudentService]
+  providers: [StudentService],
 })
 export class StudentModule {}

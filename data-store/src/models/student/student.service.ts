@@ -17,7 +17,9 @@ export class StudentService {
   ) {}
 
   findAll(): Promise<any[]> {
-    return this.studentRepository.query(`SELECT *, EXTRACT(YEAR FROM AGE("dateOfBirth")) AS "age", TO_CHAR("dateOfBirth", 'YYYY-MM-DD') as "dateOfBirth" FROM student WHERE "isActive" = true ORDER BY id ASC`);
+    return this.studentRepository.query(
+      `SELECT *, EXTRACT(YEAR FROM AGE("dateOfBirth")) AS "age", TO_CHAR("dateOfBirth", 'YYYY-MM-DD') as "dateOfBirth" FROM student WHERE "isActive" = true ORDER BY id ASC`,
+    );
   }
 
   async findOne(id: number): Promise<Student> {
@@ -28,19 +30,25 @@ export class StudentService {
     await this.studentRepository.delete(id);
   }
 
-  async create(student: (CreateStudentInput)): Promise<any> {
+  async create(student: CreateStudentInput): Promise<any> {
     return await this.studentRepository.save(student);
   }
 
   async bulkCreate(students: [CreateStudentInput]): Promise<any> {
-    return await this.studentRepository.createQueryBuilder().insert().into(Student).values(students).returning('*').execute();
+    return await this.studentRepository
+      .createQueryBuilder()
+      .insert()
+      .into(Student)
+      .values(students)
+      .returning('*')
+      .execute();
   }
 
-  async update(student: (UpdateStudentInput)): Promise<any> {
+  async update(student: UpdateStudentInput): Promise<any> {
     return await this.studentRepository.save(student);
   }
 
-  async updateStudentStatus(student: (RemoveStudentDto)): Promise<any> {
+  async updateStudentStatus(student: RemoveStudentDto): Promise<any> {
     return await this.studentRepository.save(student);
   }
 }
