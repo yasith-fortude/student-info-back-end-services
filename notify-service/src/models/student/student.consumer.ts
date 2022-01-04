@@ -12,12 +12,11 @@ export class StudentConsumer {
   @Process() // start processing waiting jobs in queue
   async transcode(job: Job<any>) {
     try {
-      console.log(`Job ${job.id} in student-data-store queue is proccesing...`)
+      console.log(`Job ${job.id} in student-data-store queue is proccesing...`);
 
       this.studentService.readStudentData(job.data.fileName.toString());
-      
+
       // const studentData = await this.studentService.save((job.data) as CreateStudentDto); // service method to create a student record in db
-      
 
       return {};
     } catch (error) {

@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StudentController } from './student.controller';
+import { StudentService } from './student.service';
 
 describe('StudentController', () => {
   let controller: StudentController;
@@ -7,6 +8,14 @@ describe('StudentController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [StudentController],
+      providers: [
+        {
+          provide: StudentService,
+          useFactory: () => {
+            addToQueue: jest.fn();
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<StudentController>(StudentController);
@@ -14,5 +23,11 @@ describe('StudentController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  describe('uploadSingle', () => {
+    it('should add uploaded file data to a queue', () => {
+      expect(controller.uploadSingle).toBeCalledTimes(1);
+    });
   });
 });

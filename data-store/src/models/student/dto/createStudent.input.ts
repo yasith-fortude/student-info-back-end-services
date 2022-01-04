@@ -3,23 +3,23 @@ import { InputType, Field } from '@nestjs/graphql';
 /**
  *  Used for both dto & GraphQL input type
  */
-@InputType() 
+@InputType()
 export class CreateStudentInput {
-    @Field(() => String)
-    firstName: string;
+  @Field(() => String)
+  firstName: string;
 
-    @Field(() => String)
-    lastName: string;
+  @Field(() => String)
+  lastName: string;
 
-    @Field(() => String)
-    gender: string;
+  @Field(() => String)
+  gender: string;
 
-    @Field(() => String)
-    address: string;
+  @Field(() => String)
+  address: string;
 
-    @Field(() => String)
-    contact: string;
+  @Field(() => String)
+  contact: string;
 
-    @Field(() => Date)
-    dateOfBirth: Date;
+  @Field(() => Date)
+  dateOfBirth: Date;
 }
